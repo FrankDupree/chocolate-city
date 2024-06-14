@@ -33,8 +33,17 @@ const Tweet = ({ tweet, setTweets, tweets }) => {
 
 
   const handleDeleteTweet = async () => {
-    await axios.delete(`https://jsonplaceholder.typicode.com/comments/${tweet.id}`);
-    setTweets(tweets.filter(t => t.id !== tweet.id));
+    if (Object.prototype.hasOwnProperty.call(tweet, 'uid')) {
+      var filteredTweets = tweets.filter(t => t.uid !== tweet.uid);
+      setTweets(filteredTweets);
+    } else {
+      try {
+        await axios.delete(`https://jsonplaceholder.typicode.com/comments/${tweet.id}`);
+        setTweets(tweets.filter(t => t.id !== tweet.id));
+      } catch (error) {
+        console.error('Error deleting tweet:', error);
+      }
+    }
   };
 
   return (

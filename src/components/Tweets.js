@@ -35,7 +35,7 @@ const Tweets = () => {
       </div>
       <div className="list-group">
         {currentTweets.map(tweet => (
-          <Tweet key={tweet.id} tweet={tweet} setTweets={setTweets} tweets={tweets} />
+          <Tweet key={tweet.uid || tweet.id} tweet={tweet} setTweets={setTweets} tweets={tweets} />
         ))}
       </div>
       {currentTweets.length > 0 && <div className="mt-3">
